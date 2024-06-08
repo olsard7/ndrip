@@ -1,17 +1,18 @@
 import React from 'react'
-import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react'
-import RootComponent from './RootComponent'
-import { persistor, store } from './store/reducers/store'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import NotFoundPage from './pages/NotFoundPage'
+import { ROUTES } from './resources/routes-constants'
+import HomePage from './pages/HomePage'
 
 const App: React.FC = () => {
-    return (
-        <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                <RootComponent />
-            </PersistGate>
-        </Provider>
-    )
+  return (
+    <Router>
+      <Routes>
+        <Route path="*" element={<NotFoundPage />} />
+        <Route path={ROUTES.HOMEPAGE_ROUTE} element={<HomePage />} />
+      </Routes>
+    </Router>
+  )
 }
 
 export default App
