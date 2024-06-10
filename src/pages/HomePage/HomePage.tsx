@@ -14,6 +14,13 @@ type HomePageProps = {
   setSelectedUser: (user: number | null) => void;
 };
 
+export const calculateName = (users: User[], selectedUser: number | null) => {
+  if (!selectedUser) {
+    return '';
+  }
+  return users.find(({ id }) => id === selectedUser)?.name;
+};
+
 const HomePage: React.FC<HomePageProps> = ({ users, onSetUsers, posts, onSetPosts, selectedUser, setSelectedUser }) => {
   const userRef = useRef<HTMLHeadingElement>(null);
   const handleRemoveUser = (id: number) => {
@@ -45,13 +52,6 @@ const HomePage: React.FC<HomePageProps> = ({ users, onSetUsers, posts, onSetPost
     setEditedPostId(null);
   };
 
-  const calculateName = (selectedUser: number | null) => {
-    if (!selectedUser) {
-      return '';
-    }
-    return users.find(({ id }) => id === selectedUser)?.name;
-  };
-
   useEffect(() => {
     if (selectedUser && userRef.current) {
       userRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -69,7 +69,7 @@ const HomePage: React.FC<HomePageProps> = ({ users, onSetUsers, posts, onSetPost
       </div>
       {!!selectedUser && (
         <>
-          <h2 ref={userRef}>User {calculateName(selectedUser)} Posts</h2>
+          <h2 ref={userRef}>User {calculateName(users, selectedUser)} Posts</h2>
           <div className={styles.usersHolder}>
             {!calculateVisiblePosts(posts, selectedUser).length && <p>User has no posts</p>}
             {calculateVisiblePosts(posts, selectedUser).map((post) => {

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { APIProvider, Map, Marker, AdvancedMarker, Pin } from '@vis.gl/react-google-maps';
 import { User } from '~/types';
 import { useNavigate } from 'react-router-dom';
+import { calculateName } from '../HomePage/HomePage';
 import styles from './MapPage.module.scss';
 
 const API_KEY = 'AIzaSyDFO8jAE-n2lHjz00Ut5Fd1wCz8q9460qw';
@@ -27,7 +28,7 @@ const MapPage: React.FC<MapPageProps> = ({ users }) => {
 
   return (
     <div className={styles.container}>
-      <h2>Map</h2>
+      <h2>Map User {calculateName(users, Number(id))}</h2>
       <button className={styles.button} onClick={() => navigate('/')}>
         Go to home page
       </button>
