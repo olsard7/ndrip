@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { UserCard } from '~/components/UserCard/UserCard';
 import styles from './HomePage.module.scss';
 import { PostCard } from '~/components/PostCard/PostCard';
@@ -15,6 +15,7 @@ type HomePageProps = {
 };
 
 const HomePage: React.FC<HomePageProps> = ({ users, onSetUsers, posts, onSetPosts, selectedUser, setSelectedUser }) => {
+  const userRef = useRef<HTMLHeadingElement>(null);
   const handleRemoveUser = (id: number) => {
     onSetUsers(users.filter((user) => user.id !== id));
     onSetPosts(posts.filter((post) => post.userId !== id));
@@ -51,6 +52,12 @@ const HomePage: React.FC<HomePageProps> = ({ users, onSetUsers, posts, onSetPost
     return users.find(({ id }) => id === selectedUser)?.name;
   };
 
+  useEffect(() => {
+    if (selectedUser && userRef.current) {
+      userRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [selectedUser]);
+
   return (
     <div className={styles.container}>
       <h2>Users</h2>
@@ -62,7 +69,7 @@ const HomePage: React.FC<HomePageProps> = ({ users, onSetUsers, posts, onSetPost
       </div>
       {!!selectedUser && (
         <>
-          <h2>User {calculateName(selectedUser)} Posts</h2>
+          <h2 ref={userRef}>User {calculateName(selectedUser)} Posts</h2>
           <div className={styles.usersHolder}>
             {!calculateVisiblePosts(posts, selectedUser).length && <p>User has no posts</p>}
             {calculateVisiblePosts(posts, selectedUser).map((post) => {
