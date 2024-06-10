@@ -15,8 +15,6 @@ type HomePageProps = {
 };
 
 const HomePage: React.FC<HomePageProps> = ({ users, onSetUsers, posts, onSetPosts, selectedUser, setSelectedUser }) => {
-  console.log(users);
-
   const handleRemoveUser = (id: number) => {
     onSetUsers(users.filter((user) => user.id !== id));
     onSetPosts(posts.filter((post) => post.userId !== id));

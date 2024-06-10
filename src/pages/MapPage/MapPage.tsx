@@ -19,7 +19,6 @@ const MapPage: React.FC<MapPageProps> = ({ users }) => {
   if (!user) {
     return null;
   }
-  console.log(user);
   const { address } = user;
   const { geo } = address;
   const { lat, lng } = geo;
