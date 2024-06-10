@@ -8,18 +8,22 @@ export const useFetchData = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
 
-  const fetchPosts = () => {
-    axios
-      .get(`${BASE_URL}/posts`)
-      .then((res) => setPosts(res.data))
-      .catch((err) => console.log(err));
+  const fetchPosts = async () => {
+    try {
+      const res = await axios.get(`${BASE_URL}/posts`);
+      setPosts(res.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const fetchUsers = () => {
-    axios
-      .get(`${BASE_URL}/users`)
-      .then((res) => setUsers(res.data))
-      .catch((err) => console.log(err));
+  const fetchUsers = async () => {
+    try {
+      const res = await axios.get(`${BASE_URL}/users`);
+      setUsers(res.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
