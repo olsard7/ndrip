@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { calculateName } from '../HomePage/HomePage';
 import styles from './MapPage.module.scss';
 
-const API_KEY = 'AIzaSyDFO8jAE-n2lHjz00Ut5Fd1wCz8q9460qw';
-const MAP_ID = 'cdc86919053d9bc3';
+const API_KEY = 'YOUR_API_KEY';
+const MAP_ID = 'YOUR_MAP_ID';
 
 type MapPageProps = {
   users: User[];
