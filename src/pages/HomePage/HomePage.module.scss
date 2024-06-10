@@ -1,0 +1,11 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.usersHolder {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 350px));
+    grid-gap: 50px;
+}
